@@ -1,0 +1,34 @@
+<div class="box">
+
+  <div class="box todos">
+    <h2 class="box">待办事项</h2>
+    <ul>
+      <% for (var i = 0; i < tasks.length; i++) {
+        var task = tasks[i];
+        var classname = task.finished ? 'class="finished"' : '';
+      %>
+        <li <%- classname %>>
+          <% if (!task.finished) { %>
+            <%= task.title %>
+            &nbsp;
+            <a href="/task/<%- task.id %>/finish">完成</a>
+          <% } else { %>
+            <del><%= task.title %></del>
+            &nbsp;
+            <a href="/task/<%- task.id %>/unfinish">恢复</a>
+          <% } %>
+        </li>
+      <% } %>
+    </ul>
+  </div>
+
+  <div class="box post">
+    <h2>新增</h2>
+    <form action="/task" method="post" id="post_new">
+      <input type="hidden" name="_csrf" value="<%- _csrf %>" />
+      <p><input type="text" name="title" class="long_txt" /></p>
+      <p><input type="submit" class="submit" value="添加" /></p>
+    </form>
+  </div>
+
+</div>
