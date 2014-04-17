@@ -51,17 +51,7 @@ if (config.debug) {
 /**
  * csrf
  */
-middlewares.csrf(app);
-app.use(function *checkCsrf(next) {
-  if (this.method === 'GET' ||
-      this.method === 'HEAD' ||
-      this.method === 'OPTIONS') {
-    return yield *next;
-  }
-
-  this.assertCsrf(this.request.body);
-  yield *next;
-});
+app.use(middlewares.csrf());
 
 /**
  * ejs template engine
