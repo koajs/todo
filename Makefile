@@ -4,14 +4,14 @@ TIMEOUT = 3000
 MOCHA_OPTS =
 
 install:
-	@npm install --registry=http://r.cnpmjs.org --disturl=http://dist.cnpmjs.org
+	@npm install --registry=http://r.cnpmjs.org --disturl=http://dist.cnpmjs.or
 
 jshint: install
 	@./node_modules/.bin/jshint .
 
-test: install
+test:
 	@NODE_ENV=test ./node_modules/.bin/mocha \
-	  --harmony
+	  --harmony \
 		--reporter $(REPORTER) \
 		--timeout $(TIMEOUT) \
 		$(MOCHA_OPTS) \
