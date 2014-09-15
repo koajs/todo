@@ -13,7 +13,7 @@ var Task = require('../models/task');
 
 module.exports = function* home(next) {
   var tasks = yield Task.list();
-  yield* this.render('index.html', {
+  yield* this.render('index', {
     tasks: tasks
   });
 };

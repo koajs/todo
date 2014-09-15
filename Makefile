@@ -2,9 +2,10 @@ TESTS = $(shell ls -S `find test -type f -name "*.test.js" -print`)
 REPORTER = spec
 TIMEOUT = 3000
 MOCHA_OPTS =
+REGISTRY = "--registry=http://registry.npm.taobao.org"
 
 install:
-	@npm install --registry=http://r.cnpmjs.org --disturl=http://dist.cnpmjs.or
+	@npm install $(REGISTRY)
 
 jshint: install
 	@./node_modules/.bin/jshint .
@@ -37,7 +38,7 @@ check-coverage:
 test-all: jshint test test-cov
 
 autod: install
-	@./node_modules/.bin/autod -w -e public,views
+	@./node_modules/.bin/autod -w -e public,views $(REGISTRY)
 	@$(MAKE) install
 
 .PHONY: test

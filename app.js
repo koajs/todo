@@ -58,7 +58,7 @@ app.use(middlewares.csrf());
  */
 middlewares.ejs(app, {
   root: __dirname + '/views',
-  layout: 'layout.html',
+  layout: 'layout',
   cache: !config.debug,
   locals: {
     _csrf: function () {
