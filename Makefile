@@ -26,19 +26,19 @@ test-cov:
 		--timeout $(TIMEOUT) \
 		$(MOCHA_OPTS) \
 		$(TESTS)
-	@-$(MAKE) check-coverage
-
-check-coverage:
-	@./node_modules/.bin/istanbul check-coverage \
-		--statements 85 \
-		--branches 85 \
-		--functions 85 \
-		--lines 85
 
 test-all: jshint test test-cov
 
+watch:
+	@./node_modules/.bin/watchify \
+		public/javascripts/app.js \
+		--debug \
+		--transform reactify \
+		--transform envify \
+		-o public/javascripts/bundle.js
+
 autod: install
-	@./node_modules/.bin/autod -w -e public,views $(REGISTRY)
+	@./node_modules/.bin/autod -w -e views $(REGISTRY)
 	@$(MAKE) install
 
 .PHONY: test

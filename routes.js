@@ -15,6 +15,10 @@ var task = require('./controllers/task');
 
 module.exports = function routes(app) {
   app.get('/', home);
-  app.post('/task', task.add);
-  app.get('/task/(:id)/finish', task.finish);
+
+  // restful task API
+  app.get('/tasks/:id', task.get);
+  app.get('/tasks', task.list);
+  app.post('/tasks', task.add);
+  app.put('/task/:id', task.update);
 };

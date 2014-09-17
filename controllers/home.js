@@ -9,11 +9,14 @@
 /**
  * Module dependencies.
  */
-var Task = require('../models/task');
+
+var config = require('../config');
+var path = require('path');
+var fs = require('fs');
+
+var page = fs.readFileSync(path.join(__dirname, '../views/index.html'), 'utf8')
+  .replace('{{version}}', config.version);
 
 module.exports = function* home(next) {
-  var tasks = yield Task.list();
-  yield* this.render('index', {
-    tasks: tasks
-  });
+  this.body = page;
 };

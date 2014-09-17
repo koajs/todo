@@ -12,16 +12,28 @@
 
 var Task = require('../models/task');
 
-exports.add = function *() {
-  var title = this.request.body.title;
-  var task = { title: title, finished: 0, created_at: new Date() };
-  yield Task.insert(task);
-  this.redirect('/');
+exports.list = function* () {
+  return yield Task.list();
 };
 
-exports.finish = function *() {
+exports.get = function* () {
   var tid = this.params.id;
-  var task = { finished: 1, updated_at: new Date() };
+  return yield Task.get(tid);
+};
+
+exports.add = function* () {
+  var title = this.request.body.title;
+  var task = { title: title, finished: 0, created_at: new Date() };
+  var id = yield Task.insert(task);
+  this.body = {id: id};
+  this.staus = 201;
+};
+
+exports.update = function *() {
+  var tid = this.params.id;
+  var task = this.request.body;
+  task.updated_at = new Date();
+
   yield Task.updateById(tid, task);
-  this.redirect('/');
+  return 200;
 };

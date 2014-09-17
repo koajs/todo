@@ -15,13 +15,13 @@ var crypto = require('crypto');
 var db = require('../common/db');
 var thunkify = require('thunkify-wrap');
 
-exports.insert = function *(task) {
+exports.insert = function* (task) {
   var id = utility.md5(task.title + crypto.randomBytes(60).toString('hex'));
   yield db.put(id, task);
   return id;
 };
 
-exports.updateById = function *(id, task) {
+exports.updateById = function* (id, task) {
   var row = yield db.get(id);
   for (var key in task) {
     row[key] = task[key];
@@ -29,7 +29,7 @@ exports.updateById = function *(id, task) {
   yield db.put(id, row);
 };
 
-exports.list = function *() {
+exports.list = function* () {
   var err = null;
   var items = [];
   var finishes = [];
@@ -52,4 +52,8 @@ exports.list = function *() {
     return a.created_at > b.created_at ? -1 : 1;
   });
   return items.concat(finishes);
+};
+
+exports.get = function* (tid) {
+  return yield db.get(tid);
 };
