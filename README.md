@@ -16,6 +16,12 @@ a todo example write with koa and react.
 - superagent
 - browserify
 
+## TODO
+
+- [] backend test
+- [] frontend test
+- [] try flux?
+
 ## Tree
 
 ```
