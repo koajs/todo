@@ -23,7 +23,7 @@ exports.get = function* () {
 
 exports.add = function* () {
   var title = this.request.body.title;
-  var task = { title: title, finished: 0, created_at: new Date() };
+  var task = { title: title, complete: false, created_at: new Date() };
   var id = yield Task.insert(task);
   this.body = {id: id};
   this.staus = 201;

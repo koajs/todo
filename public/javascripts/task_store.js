@@ -4,7 +4,13 @@ var request = require('superagent');
 
 function TaskStore() {
   this._tasks = [];
-  this._change();
+
+  var typeFromHash = location.hash.slice(1);
+  this._type = ~['Completed', 'Active'].indexOf(typeFromHash)
+    ? typeFromHash
+    : 'All';
+
+  this._changeTask();
 }
 
 inherits(TaskStore, EventEmitter);
@@ -14,39 +20,47 @@ TaskStore.prototype.list = function () {
 };
 
 TaskStore.prototype.create = function (title) {
-  console.log('create')
   request
     .post('/tasks')
     .send({title: title})
-    .end(this._change.bind(this));
+    .end(this._changeTask.bind(this));
 };
 
 TaskStore.prototype.update = function (task) {
   request
     .put('/tasks/' + task.id)
     .send(task)
-    .end(this._change.bind(this));
+    .end(this._changeTask.bind(this));
 };
 
 TaskStore.prototype.destroy = function (task) {
   request
     .del('/tasks/' + task.id)
-    .end(this._change.bind(this));
+    .end(this._changeTask.bind(this));
 }
 
 TaskStore.prototype.clearCompeted = function () {
   request
     .post('/tasks/clear')
-    .end(this._change.bind(this));
+    .end(this._changeTask.bind(this));
 };
 
 TaskStore.prototype.completeAll = function () {
   request
     .post('/tasks/complete')
-    .end(this._change.bind(this));
+    .end(this._changeTask.bind(this));
 };
 
-TaskStore.prototype._change = function () {
+TaskStore.prototype.getType = function () {
+  return this._type;
+};
+
+TaskStore.prototype.selectType = function (type) {
+  this._type = type;
+  this.emit('change');
+};
+
+TaskStore.prototype._changeTask = function () {
   request
   .get('/tasks')
   .end(function (err, res) {
@@ -58,6 +72,7 @@ TaskStore.prototype._change = function () {
     this.emit('change');
   }.bind(this));
 };
+
 
 var taskStore = new TaskStore();
 module.exports = taskStore;

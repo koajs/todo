@@ -9,7 +9,8 @@ var taskStore = require('../task_store');
 var TodoList = React.createClass({
 
   propTypes: {
-    tasks: React.PropTypes.array.isRequired
+    tasks: React.PropTypes.array.isRequired,
+    type: React.PropTypes.string.isRequired
   },
 
   render: function() {
@@ -19,7 +20,14 @@ var TodoList = React.createClass({
       return null;
     }
 
+    // filter by type
     var tasks = this.props.tasks;
+    if (this.props.type !== 'All') {
+      tasks = tasks.filter(function (task) {
+        return this.props.type === 'Completed' ? task.complete : !task.complete;
+      }.bind(this));
+    }
+
     var todos = [];
 
     var todos = tasks.map(function(task) {

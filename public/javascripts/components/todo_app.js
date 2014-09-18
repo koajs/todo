@@ -11,7 +11,8 @@ var taskStore = require('../task_store');
 var TodoApp = React.createClass({
   getInitialState: function () {
     return {
-      tasks: taskStore.list()
+      tasks: taskStore.list(),
+      type: taskStore.getType()
     };
   },
 
@@ -27,15 +28,16 @@ var TodoApp = React.createClass({
     return (
       <div>
         <Header/>
-        <TodoList tasks={this.state.tasks} />
-        <Footer tasks={this.state.tasks} />
+        <TodoList tasks={this.state.tasks} type={this.state.type} />
+        <Footer tasks={this.state.tasks}  type={this.state.type}/>
       </div>
     );
   },
 
   _onChange: function () {
     this.setState({
-      tasks: taskStore.list()
+      tasks: taskStore.list(),
+      type: taskStore.getType()
     });
   }
 });

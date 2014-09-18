@@ -32,26 +32,15 @@ exports.updateById = function* (id, task) {
 exports.list = function* () {
   var err = null;
   var items = [];
-  var finishes = [];
   var stream = db.createReadStream();
   stream.on('data', function (data) {
     var value = data.value;
     value.id = data.key;
-    if (value.finished) {
-      finishes.push(value);
-    } else {
-      items.push(value);
-    }
+    items.push(value);
   });
   var end = thunkify.event(stream);
   yield end();
-  items.sort(function (a, b) {
-    return a.created_at > b.created_at ? -1 : 1;
-  });
-  finishes.sort(function (a, b) {
-    return a.created_at > b.created_at ? -1 : 1;
-  });
-  return items.concat(finishes);
+  return items;
 };
 
 exports.get = function* (tid) {

@@ -9,7 +9,8 @@ var Footer = React.createClass({
 
   // in dev env, will check tasks' type
   propTypes: {
-    tasks: React.PropTypes.array.isRequired
+    tasks: React.PropTypes.array.isRequired,
+    type: React.PropTypes.string.isRequired
   },
 
   render: function() {
@@ -34,6 +35,22 @@ var Footer = React.createClass({
         </button>
     }
 
+    var filter = ['All', 'Active', 'Completed'].map(function (t) {
+      var selected = this.props.type === t ? 'selected' : '';
+      var hash = '#' + (t === 'All' ? '' : t);
+      return (
+        <li key={t}>
+          <a
+            href={hash}
+            className={selected}
+            onClick={this._onTypeButtonClick}>
+            {t}
+          </a>
+        </li>
+      );
+
+    }.bind(this));
+
     return (
       <footer id="footer">
         <span id="todo-count">
@@ -42,6 +59,9 @@ var Footer = React.createClass({
           </strong>
           {leftLabel}
         </span>
+        <ul id="filters">
+        {filter}
+        </ul>
         {clearCompletedButton}
       </footer>
     );
@@ -49,6 +69,11 @@ var Footer = React.createClass({
 
   _onClearCompleteButtonClick: function () {
     taskStore.clearCompeted();
+  },
+
+   _onTypeButtonClick: function (event) {
+    var newType = event.target.textContent;
+    taskStore.selectType(newType);
   }
 });
 
