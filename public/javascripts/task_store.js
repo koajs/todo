@@ -1,67 +1,62 @@
 var EventEmitter = require('events').EventEmitter;
 var inherits = require('util').inherits;
+var request = require('superagent');
 
 function TaskStore() {
   this._tasks = [];
-  this._id = 1;
+  this._change();
 }
 
 inherits(TaskStore, EventEmitter);
-
-TaskStore.prototype.init = function () {
-  this._id = 3;
-  // TODO: init from server
-  this._tasks = [
-    {id: 1, title: 'test1', complete: false},
-    {id: 2, title: 'test2', complete: true}
-  ];
-  this._change();
-};
 
 TaskStore.prototype.list = function () {
   return this._tasks;
 };
 
 TaskStore.prototype.create = function (title) {
-  var task = {id: this._id++, title: title, complete: false};
-  this._tasks.push(task);
-  this._change();
+  console.log('create')
+  request
+    .post('/tasks')
+    .send({title: title})
+    .end(this._change.bind(this));
 };
 
 TaskStore.prototype.update = function (task) {
-  for (var i = 0; i < this._tasks.length; i++) {
-    var item = this._tasks[i];
-    if (item.id !== task.id) continue;
-    for (var key in task) item[key] = task[key];
-    this._change();
-    return;
-  }
+  request
+    .put('/tasks/' + task.id)
+    .send(task)
+    .end(this._change.bind(this));
 };
 
 TaskStore.prototype.destroy = function (task) {
-  this._tasks = this._tasks.filter(function (t) {
-    return t.id !== task.id;
-  });
-  this._change();
+  request
+    .del('/tasks/' + task.id)
+    .end(this._change.bind(this));
 }
 
 TaskStore.prototype.clearCompeted = function () {
-  this._tasks = this._tasks.filter(function (task) {
-    return !task.complete;
-  });
-  this._change();
+  request
+    .post('/tasks/clear')
+    .end(this._change.bind(this));
 };
 
 TaskStore.prototype.completeAll = function () {
-  this._tasks.forEach(function (task) {
-    task.complete = true;
-  });
-
-  this._change();
+  request
+    .post('/tasks/complete')
+    .end(this._change.bind(this));
 };
 
 TaskStore.prototype._change = function () {
-  this.emit('change');
+  request
+  .get('/tasks')
+  .end(function (err, res) {
+    if (err) {
+      console.error(err);
+      this.emit('error', err);
+    }
+    if (res.body) this._tasks = res.body;
+    this.emit('change');
+  }.bind(this));
 };
 
 var taskStore = new TaskStore();

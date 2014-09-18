@@ -17,8 +17,11 @@ module.exports = function routes(app) {
   app.get('/', home);
 
   // restful task API
+  app.post('/tasks/clear', task.clear);
+  app.post('/tasks/complete', task.complete);
   app.get('/tasks/:id', task.get);
   app.get('/tasks', task.list);
   app.post('/tasks', task.add);
-  app.put('/task/:id', task.update);
+  app.put('/tasks/:id', task.update);
+  app.del('/tasks/:id', task.destroy);
 };

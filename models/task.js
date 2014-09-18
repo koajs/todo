@@ -57,3 +57,37 @@ exports.list = function* () {
 exports.get = function* (tid) {
   return yield db.get(tid);
 };
+
+exports.destroy = function* (tid) {
+  return yield db.del(tid);
+};
+
+exports.clear = function* () {
+  var tasks = yield exports.list();
+  var ops = tasks.filter(function (task) {
+    return task.complete;
+  }).map(function (task) {
+    return {
+      type: 'del',
+      key: task.id
+    }
+  });
+
+  return yield db.batch(ops);
+};
+
+exports.complete = function* () {
+  var tasks = yield exports.list();
+  var ops = tasks.filter(function (task) {
+    return !task.complete;
+  }).map(function (task) {
+    task.complete = true;
+    return {
+      type: 'put',
+      key: task.id,
+      value: task
+    }
+  });
+
+  return yield db.batch(ops);
+};

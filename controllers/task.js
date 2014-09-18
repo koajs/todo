@@ -13,7 +13,7 @@
 var Task = require('../models/task');
 
 exports.list = function* () {
-  return yield Task.list();
+  this.body = yield Task.list();
 };
 
 exports.get = function* () {
@@ -29,11 +29,27 @@ exports.add = function* () {
   this.staus = 201;
 };
 
-exports.update = function *() {
+exports.update = function* () {
   var tid = this.params.id;
   var task = this.request.body;
   task.updated_at = new Date();
 
   yield Task.updateById(tid, task);
-  return 200;
+  this.status = 200;
+};
+
+exports.destroy = function* () {
+  var tid = this.params.id;
+  yield Task.destroy(tid);
+  this.status = 200;
+};
+
+exports.complete = function* () {
+  yield Task.complete();
+  this.status = 200;
+};
+
+exports.clear = function* () {
+  yield Task.clear();
+  this.status = 200;
 };
