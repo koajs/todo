@@ -35,7 +35,15 @@ watch:
 		--debug \
 		--transform reactify \
 		--transform envify \
+		-v \
 		-o public/javascripts/bundle.js
+
+build:
+	@NODE_ENV=production ./node_modules/.bin/browserify \
+	public/javascripts/app.js \
+	--transform reactify \
+	--transform envify \
+	-o public/javascripts/bundle.js
 
 autod: install
 	@./node_modules/.bin/autod -w -e views,public/javascripts/bundle.js $(REGISTRY)
