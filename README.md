@@ -20,9 +20,9 @@ a todo example write with koa and react.
 
 ## TODO
 
-- [] backend test
-- [] frontend test
-- [] try flux?
+- [ ] backend test
+- [ ] frontend test
+- [ ] try flux?
 
 ## Tree
 
