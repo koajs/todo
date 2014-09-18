@@ -5,6 +5,16 @@ a todo example write with koa and react.
 
 ![](snapshot.png)
 
+## Develop
+
+```
+git clone git@github.com:dead-horse/koa-todo.git
+make install
+make watch
+# use node 0.11
+node --harmony app.js
+```
+
 ## Technology
 
 ### backend
