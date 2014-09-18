@@ -1,14 +1,25 @@
 koa-todo
 ========
 
-a todo example write with koa
+a todo example write with koa and react.
 
-### Tree
+## Technology
+
+### backend
+
+- koa
+- levelup
+
+### frontend
+
+- react (without flux)
+- superagent
+- browserify
+
+## Tree
 
 ```
-├── LICENSE
 ├── Makefile
-├── README.md
 ├── app.js
 ├── common
 │   └── db.js
@@ -20,27 +31,28 @@ a todo example write with koa
 │   └── task.js
 ├── package.json
 ├── public
-│   ├── images
-│   │   ├── doing.gif
-│   │   └── finished.jpg
-│   └── styles
-│       ├── index
-│       │   ├── images
-│       │   │   ├── bg_1.png
-│       │   │   ├── email.png
-│       │   │   ├── home.png
-│       │   │   ├── msn.png
-│       │   │   ├── ok.gif
-│       │   │   ├── qq.png
-│       │   │   └── website.png
-│       │   └── style.css
-│       └── reset.css
+│   ├── javascripts
+│   │   ├── app.js
+│   │   ├── bundle.js
+│   │   ├── components
+│   │   │   ├── footer.js
+│   │   │   ├── header.js
+│   │   │   ├── textinput.js
+│   │   │   ├── todo.js
+│   │   │   ├── todo_app.js
+│   │   │   └── todo_list.js
+│   │   └── task_store.js
+│   └── todomvc-common
+│       ├── base.css
+│       ├── bg.png
+│       ├── bower.json
+│       └── readme.md
 ├── routes.js
 ├── test
 └── views
-    ├── error.html
-    ├── index.html
-    ├── layout.html
-    └── task
-        └── edit.html
+    └── index.html
 ```
+
+## License
+
+MIT
