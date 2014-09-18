@@ -20,5 +20,5 @@ var db = leveldb('/does/not/matter', {
   db: memdown
 });
 
-thunkify(db, ['get', 'put']);
+thunkify(db, ['get', 'put', 'del', 'batch']);
 module.exports = db;

@@ -10,19 +10,13 @@
  * Module dependencies.
  */
 
-var path = require('path');
-var koa = require('koa');
 var middlewares = require('koa-middlewares');
 var routes = require('./routes');
 var config = require('./config');
+var path = require('path');
+var koa = require('koa');
 
 var app = koa();
-app.outputErrors = true;
-
-/**
- * cookie secret keys
- */
-app.keys = ['todo secret', 'lol'];
 
 /**
  * ignore favicon
@@ -42,34 +36,10 @@ app.use(middlewares.staticCache(path.join(__dirname, 'public'), {
   maxAge: config.debug ? 0 : 60 * 60 * 24 * 7
 }));
 app.use(middlewares.bodyParser());
-app.use(middlewares.session());
 
 if (config.debug) {
   app.use(middlewares.logger());
 }
-
-/**
- * csrf
- */
-app.use(middlewares.csrf());
-
-/**
- * ejs template engine
- */
-middlewares.ejs(app, {
-  root: __dirname + '/views',
-  layout: 'layout',
-  cache: !config.debug,
-  locals: {
-    _csrf: function () {
-      return this.csrf || '';
-    },
-    now: function () {
-      return new Date();
-    },
-    config: config
-  }
-});
 
 /**
  * router
