@@ -11,6 +11,8 @@ function TaskStore() {
     : 'All';
 
   this._changeTask();
+  // auto refresh
+  setInterval(this._changeTask.bind(this), 1000);
 }
 
 inherits(TaskStore, EventEmitter);
@@ -72,7 +74,6 @@ TaskStore.prototype._changeTask = function () {
     this.emit('change');
   }.bind(this));
 };
-
 
 var taskStore = new TaskStore();
 module.exports = taskStore;
