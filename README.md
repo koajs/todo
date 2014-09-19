@@ -30,6 +30,7 @@ node --harmony app.js
 
 ## TODO
 
+- [ ] socket.io
 - [ ] backend test
 - [ ] frontend test
 - [ ] try flux?
