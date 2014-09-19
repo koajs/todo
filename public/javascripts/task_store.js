@@ -12,7 +12,7 @@ function TaskStore() {
 
   this._changeTask();
   // auto refresh
-  setInterval(this._changeTask.bind(this), 1000);
+  // setInterval(this._changeTask.bind(this), 1000);
 }
 
 inherits(TaskStore, EventEmitter);

@@ -15,8 +15,8 @@ var path = require('path');
 
 var config = {
   version: version,
-  debug: true,
-  port: 7001
+  debug: process.env.NODE_ENV !== 'production',
+  port: process.env.PORT || 7001
 };
 
 module.exports = config;
