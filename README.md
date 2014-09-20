@@ -2,19 +2,19 @@ koa-todo
 ========
 
 [![build status][travis-image]][travis-url]
+[![Coveralls][coveralls-image]][coveralls-url]
 [![David deps][david-image]][david-url]
 [![node version][node-image]][node-url]
-[![npm download][download-image]][download-url]
 [![Gittip][gittip-image]][gittip-url]
 
 [travis-image]: https://img.shields.io/travis/koajs/todo.svg?style=flat-square
 [travis-url]: https://travis-ci.org/koajs/todo
+[coveralls-image]: https://img.shields.io/coveralls/koajs/todo.svg?style=flat
+[coveralls-url]: https://coveralls.io/r/koajs/todo?branch=master
 [david-image]: https://img.shields.io/david/koajs/todo.svg?style=flat-square
 [david-url]: https://david-dm.org/koajs/todo
 [node-image]: https://img.shields.io/badge/node.js-%3E=_0.11-red.svg?style=flat-square
 [node-url]: http://nodejs.org/download/
-[download-image]: https://img.shields.io/npm/dm/koa-todo.svg?style=flat-square
-[download-url]: https://npmjs.org/package/koa-todo
 [gittip-image]: https://img.shields.io/gittip/dead-horse.svg?style=flat-square
 [gittip-url]: https://www.gittip.com/dead-horse/
 
