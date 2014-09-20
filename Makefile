@@ -24,6 +24,16 @@ test-cov:
 		$(MOCHA_OPTS) \
 		$(TESTS)
 
+test-travis:
+	@NODE_ENV=test node --harmony \
+		node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha \
+		--report lcovonly \
+		-- -u exports \
+		--reporter $(REPORTER) \
+		--timeout $(TIMEOUT) \
+		$(MOCHA_OPTS) \
+		$(TESTS)
+
 watch:
 	@./node_modules/.bin/watchify \
 		public/javascripts/app.js \
