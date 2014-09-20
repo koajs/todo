@@ -9,7 +9,7 @@ koa-todo
 
 [travis-image]: https://img.shields.io/travis/koajs/todo.svg?style=flat-square
 [travis-url]: https://travis-ci.org/koajs/todo
-[coveralls-image]: https://img.shields.io/coveralls/koajs/todo.svg?style=flat
+[coveralls-image]: https://img.shields.io/coveralls/koajs/todo.svg?style=flat-sqaure
 [coveralls-url]: https://coveralls.io/r/koajs/todo?branch=master
 [david-image]: https://img.shields.io/david/koajs/todo.svg?style=flat-square
 [david-url]: https://david-dm.org/koajs/todo
