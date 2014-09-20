@@ -7,9 +7,6 @@ REGISTRY = "--registry=http://registry.npm.taobao.org"
 install:
 	@npm install $(REGISTRY)
 
-jshint: install
-	@./node_modules/.bin/jshint .
-
 test:
 	@NODE_ENV=test ./node_modules/.bin/mocha \
 	  --harmony \
@@ -26,8 +23,6 @@ test-cov:
 		--timeout $(TIMEOUT) \
 		$(MOCHA_OPTS) \
 		$(TESTS)
-
-test-all: jshint test test-cov
 
 watch:
 	@./node_modules/.bin/watchify \

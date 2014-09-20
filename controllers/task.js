@@ -16,17 +16,17 @@ exports.list = function* () {
   this.body = yield Task.list();
 };
 
-exports.get = function* () {
-  var tid = this.params.id;
-  return yield Task.get(tid);
-};
-
 exports.add = function* () {
   var title = this.request.body.title;
+  if (!title) {
+    this.status = 400;
+    this.body = { success: false, message: 'title required' };
+    return;
+  }
   var task = { title: title, complete: false, created_at: new Date() };
   var id = yield Task.insert(task);
   this.body = {id: id};
-  this.staus = 201;
+  this.status = 201;
 };
 
 exports.update = function* () {

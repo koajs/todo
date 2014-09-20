@@ -19,7 +19,6 @@ module.exports = function routes(app) {
   // restful task API
   app.post('/tasks/clear', task.clear);
   app.post('/tasks/complete', task.complete);
-  app.get('/tasks/:id', task.get);
   app.get('/tasks', task.list);
   app.post('/tasks', task.add);
   app.put('/tasks/:id', task.update);
