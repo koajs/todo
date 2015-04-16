@@ -51,7 +51,7 @@ build:
 	-o public/javascripts/bundle.js
 
 autod: install
-	@./node_modules/.bin/autod -w -e views,public/javascripts/bundle.js $(REGISTRY)
+	@./node_modules/.bin/autod -w -e views,public/javascripts/bundle.js $(REGISTRY) --prefix="~"
 	@$(MAKE) install
 
 .PHONY: test
