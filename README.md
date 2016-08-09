@@ -25,7 +25,7 @@ a todo example write with koa and react.
 ## Develop
 
 ```
-git clone git@github.com:dead-horse/koa-todo.git
+git clone https://github.com/koajs/todo.git
 make install
 make watch
 # use node 0.11
