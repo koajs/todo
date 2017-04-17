@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "autod": "*",
-    "browserify": "~5.11.2",
+    "browserify": "~13.0.0",
     "envify": "~3.0.0",
     "istanbul-harmony": "*",
     "mocha": "~1.21.4",
